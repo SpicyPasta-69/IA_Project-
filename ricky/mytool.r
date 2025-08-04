@@ -1,0 +1,3 @@
+clear = function() {
+    shell("cls");
+}
