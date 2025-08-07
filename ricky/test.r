@@ -34,15 +34,19 @@ fcmSummary = csv %>%
   mutate(Month = floor_date(Date.Rptd, unit = "month")) %>%
   group_by(Month) %>%
   summarise(Count = n()) %>%
-  arrange(Month)
+  arrange(Month);
 
 plot(fcmSummary$Month, fcmSummary$Count, type = "l", col = "blue", main = "Frequency Crime of Month")
 
 
 ### madatory 2 ###
 
-genderSummary = csv %>%
-  group_by()
+labels = c(F = "Female", H = "Hybrid", M = "Male", N = "No tell");
 
-pie(slices, labels = labels, main = "Fruit Distribution", col = rainbow(length(slices)));
+genderSummary = csv %>%
+  mutate(label = ifelse(is.na(labels[Vict.Sex]), "unknown", labels[Vict.Sex])) %>%
+  group_by(label) %>%
+  summarise(Count = n());
+
+pie(genderSummary$Count, labels = genderSummary$label, main = "Gender Proportion", col = rainbow(length(genderSummary$Count)));
 
