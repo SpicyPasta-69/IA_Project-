@@ -12,7 +12,7 @@ require(lubridate);
 
 ### Constants ###
 
-CSV_PATH = "../Orignal.csv";
+CSV_PATH = "Group3_Crime_Data.csv";
 
 
 
@@ -28,19 +28,21 @@ csv$Date.Rptd = as.Date(csv$Date.Rptd);
 
 
 
-### Create "Frequency Crime of Dates" plot ###
+### mandatory 1 ###
 
-csvSummary = csv %>%
-  mutate(Week = floor_date(DATE.OCC, unit = "30 days")) %>%
-  group_by(DATE.OCC) %>%
-  summarise(Count = n());
+fcmSummary = csv %>%
+  mutate(Month = floor_date(Date.Rptd, unit = "month")) %>%
+  group_by(Month) %>%
+  summarise(Count = n()) %>%
+  arrange(Month)
 
-ggplot(csvSummary, aes(x = DATE.OCC, y = Count)) +
-  geom_col(fill = "steelblue") +
-  labs(title = "Frequency Crime of Dates", x = "Date", y = "Crime Count") +
-  theme_minimal();
+plot(fcmSummary$Month, fcmSummary$Count, type = "l", col = "blue", main = "Frequency Crime of Month")
 
 
-### 
+### madatory 2 ###
 
+genderSummary = csv %>%
+  group_by()
+
+pie(slices, labels = labels, main = "Fruit Distribution", col = rainbow(length(slices)));
 
